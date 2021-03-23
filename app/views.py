@@ -24,7 +24,7 @@ def home():
 @app.route('/about/')
 def about():
     """Render the website's about page."""
-    return render_template('about.html', name="Mary Jane")
+    return render_template('about.html', name="S~Jones")
 
 
 @app.route('/upload', methods=['POST', 'GET'])
@@ -40,13 +40,15 @@ def upload():
         if u_form.validate_on_submit():
 
             # Get file data and save to your uploads folder
-            photo = u_form.image.data
+            photo = u_form.photo.data
 
             file_name = secure_filename(photo.filename)
-            photo.save(os.path.join(app.config[UPLOAD_FOLDER], file_name))
+            photo.save(os.path.join(app.config['UPLOAD_FOLDER'], file_name))
 
             flash('File Saved', 'success')
             return redirect(url_for('home'))
+        else:
+            flash_errors(form)
 
     return render_template('upload.html', form=u_form)
 
