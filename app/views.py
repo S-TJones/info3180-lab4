@@ -66,6 +66,18 @@ def upload():
     return render_template('upload.html', form=u_form)
 
 
+@app.route('/files')
+def files():
+
+    # Makes it only accessible to users who are logged in.
+    if not session.get('logged_in'):
+        abort(401)
+
+    photos = get_uploaded_images()
+
+    return render_template('files.html', all_photos=photos)
+
+
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     error = None
