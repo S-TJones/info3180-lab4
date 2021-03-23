@@ -10,6 +10,19 @@ from flask import render_template, request, redirect, url_for, flash, session, a
 from werkzeug.utils import secure_filename
 from .forms import UploadForm
 
+# Helper Function -----------------------------------
+# Python script for iterating over files in a specific directory
+def get_uploaded_images():
+
+    file_list = list()
+    rootdir = os.path.join(app.config['UPLOAD_FOLDER'])
+
+    for subdir, dirs, files in os.walk(rootdir):
+
+        for file in files:
+            file_list.append(file)
+
+    return file_list
 
 ###
 # Routing for your application.
