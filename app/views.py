@@ -9,6 +9,7 @@ from app import app
 from flask import render_template, request, redirect, url_for, flash, session, abort
 from werkzeug.utils import secure_filename
 from .forms import UploadForm
+from flask.helpers import send_from_directory
 
 # Helper Function -----------------------------------
 # Python script for iterating over files in a specific directory
@@ -65,6 +66,11 @@ def upload():
 
     return render_template('upload.html', form=u_form)
 
+
+@app.route('/uploads/<filename>')
+def get_image(filename):
+    rootdir = os.getcwd()
+    return  send_from_directory(os.path.join(rootdir, app.config['UPLOAD_FOLDER']), filename)
 
 @app.route('/files')
 def files():
