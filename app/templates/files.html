@@ -3,7 +3,7 @@
 
 {% block main %}
 
-    <div class="columns">
+    
       <h1 class="title">Uploads</h1>
 
       {% include 'flash_messages.html' %}
@@ -13,6 +13,5 @@
         <img class="uploaded-img" src="{{ url_for('get_image', filename=photo) }}" alt="Uploaded Image" />
       {% endfor %}
       </div>
-    </div>
 
 {% endblock %}
